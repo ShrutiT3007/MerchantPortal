@@ -15,7 +15,7 @@ async function initialiseServer() {
     logger.info();
     try {
         if (process.env.ENVIRONMENT !== constants.ENVIRONMENT.DEV) {
-            await Vault.initilizeVault();
+            //await Vault.initilizeVault();
         }
     
         await Promise.all([merchantPortalDb.setDbInstance(), Authorization.setInstance()]);     
