@@ -15,9 +15,10 @@ const ERROR_MESSAGE = {
     DB_CONNECTION_FAILED: "DB_CONNECTION_FAILED",
     WRONG_ACCESS_TYPE: "WRONG_ACCESS_TYPE",
     NOT_FOUND: "NOT_FOUND",
-    SESSION_EXPIRED :"SESSION_EXPIRED",
-    FLOW_ID_IN_USE : "FLOW_ID_IN_USE",
-    
+    SESSION_EXPIRED: "SESSION_EXPIRED",
+    FLOW_ID_IN_USE: "FLOW_ID_IN_USE",
+    QA_SERVICE_NOT_FOUND: "QA_SERVICE_NOT_FOUND",
+
 };
 
 const ERROR_RESPONSE = {
@@ -99,7 +100,12 @@ const ERROR_RESPONSE = {
     FLOW_ID_IN_USE: {
         message: "FlowId currently in use please try later or use another flowId",
         statusCode: httpStatus.BAD_REQUEST,
-        errorCode :"ERR-111"
+        errorCode: "ERR-111"
+    },
+    QA_SERVICE_NOT_FOUND: {
+        message: "No QA flows are mapped to the given serviceName",
+        statusCode: httpStatus.NOT_FOUND,
+        errorCode: "ERR-112",
     },
 };
 
@@ -163,6 +169,7 @@ const SUCCESS_MESSAGE = {
     FLOW_UPDATED: "Flow updated successfully.",
     FLOW_CREATED: "Flow ctreated successfully.",
     TEST_SYNC_COMPLETED: "Test execution completed successfully. par shruti se slow hu 🥲",
+    QA_SERVICE_TRIGGERED: "QA flows for the service have been triggered.",
 };
 
 const USER = {
@@ -228,6 +235,17 @@ const ALERTS = {
     xyz: "xyz",
 };
 
+const QA_SERVICE_STATUS = {
+    SUCCESS: "SUCCESS",
+    PARTIAL_SUCCESS: "PARTIAL_SUCCESS",
+    FAILED: "FAILED",
+};
+
+const QA_SERVICE_FLOW_STATUS = {
+    TRIGGERED: "TRIGGERED",
+    FAILED: "FAILED",
+};
+
 const QA_TESTING_HEADERS = {
     ID: "Test Case ID",
     SCENARIO: "Test Case Scenario",
@@ -268,7 +286,7 @@ const QA_TEST_LOCK_PADDING = 1000;
 
 const BATCH_SIZE = 10;
 
-const QA_FILE_HEADERS = ["Testcase id" ,"description" , "url" ,"method", "headers" , "params", "body" , "expectedOutput" , "dbQueries" , "delay" , "apiResponse" , "output"];
+const QA_FILE_HEADERS = ["Testcase id", "description", "url", "method", "headers", "params", "body", "expectedOutput", "dbQueries", "delay", "apiResponse", "output"];
 
 const MOB_NOTIFICATIONS = {
     ONBOARDING_STATUS: {
@@ -335,20 +353,20 @@ const MOB_NOTIFICATIONS = {
 };
 
 const MOB_SQS = {
-    staging : "https://sqs.ap-south-1.amazonaws.com/259209043622/mob_pa_onboard_entity_notification_sqs"
+    staging: "https://sqs.ap-south-1.amazonaws.com/259209043622/mob_pa_onboard_entity_notification_sqs"
     // staging : "https://sqs.ap-southeast-2.amazonaws.com/962214556710/myqueue"
 }
 
 
 const TXN = {
-  ORCHESTRATOR_URL:
-    "https://merchanteventorchestrator-staging.fcinternal.in/dev/sqs/transaction",
-  MASTER_KEY: "EYOP14DA5",
-  TOPIC_ARN: "arn:aws:sns:ap-south-1:364871072205:fcpg_outbound_notification_sns_qa",
-  SIGNING_CERT_URL:
-    "https://sns.ap-south-1.amazonaws.com/SimpleNotificationService-9c6465fa7f48f5cacd23014631ec1136.pem",
-  UNSUBSCRIBE_URL:
-    "https://sns.ap-south-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:ap-south-1:364871072205:fcpg_outbound_notification_sns_qa:808a0ae4-7772-4e78-a85a-ed2ec0b2b45e",
+    ORCHESTRATOR_URL:
+        "https://merchanteventorchestrator-staging.fcinternal.in/dev/sqs/transaction",
+    MASTER_KEY: "EYOP14DA5",
+    TOPIC_ARN: "arn:aws:sns:ap-south-1:364871072205:fcpg_outbound_notification_sns_qa",
+    SIGNING_CERT_URL:
+        "https://sns.ap-south-1.amazonaws.com/SimpleNotificationService-9c6465fa7f48f5cacd23014631ec1136.pem",
+    UNSUBSCRIBE_URL:
+        "https://sns.ap-south-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:ap-south-1:364871072205:fcpg_outbound_notification_sns_qa:808a0ae4-7772-4e78-a85a-ed2ec0b2b45e",
 };
 
 const EIL_STARTING_DATE = "2023-10-10 00:00:00";
@@ -381,5 +399,7 @@ module.exports = {
     MOB_NOTIFICATIONS,
     MOB_SQS,
     TXN,
-    EIL_STARTING_DATE
+    EIL_STARTING_DATE,
+    QA_SERVICE_STATUS,
+    QA_SERVICE_FLOW_STATUS
 };

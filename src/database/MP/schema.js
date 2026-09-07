@@ -70,8 +70,8 @@ const tableSchema = {
             cronTime: { type: DataTypes.STRING, allowNull: true },
             threshold: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 100 },
             name: { type: DataTypes.STRING, allowNull: false },
-            isActive :{ type:DataTypes.BOOLEAN , allowNull:false , defaultValue:true},
-            alertDelay: {type:DataTypes.INTEGER , allowNull:false , defaultValue:30}
+            isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+            alertDelay: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 30 }
         },
         options: {
             freezeTableName: true,
@@ -158,15 +158,15 @@ const tableSchema = {
             serviceName: {
                 type: DataTypes.STRING(50),
             },
-            serverName:{
+            serverName: {
                 type: DataTypes.STRING,
             },
-            ip:{
-                type:DataTypes.STRING,
+            ip: {
+                type: DataTypes.STRING,
                 // unique:true,
             },
-            chatUrl:{
-                type:DataTypes.STRING,
+            chatUrl: {
+                type: DataTypes.STRING,
             }
         },
         options: {
@@ -232,10 +232,10 @@ const tableSchema = {
         name: "qa_flows",
         schema: {
             id: {
-    type: DataTypes.BIGINT,
-    primaryKey: true,
-    autoIncrement: true
-},
+                type: DataTypes.BIGINT,
+                primaryKey: true,
+                autoIncrement: true
+            },
             flowName: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -244,12 +244,12 @@ const tableSchema = {
             flow: {
                 type: DataTypes.JSON,
                 AllowNull: true,
-                default : {}
+                default: {}
             },
             data: {
                 type: DataTypes.JSON,
                 AllowNull: true,
-                default : {},
+                default: {},
             },
         },
         options: {
@@ -294,6 +294,32 @@ const tableSchema = {
             delay: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+            },
+        },
+        options: {
+            freezeTableName: true,
+            id: false,
+            timestamps: false,
+        },
+    },
+    qaServices: {
+        name: "qa_services",
+        schema: {
+            serviceName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                primaryKey: true,
+            },
+            qaFlowId: {
+                type: DataTypes.BIGINT,
+                allowNull: false,
+                primaryKey: true,
+                references: {
+                    model: "qa_flows",
+                    key: "id",
+                },
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE",
             },
         },
         options: {
@@ -353,9 +379,9 @@ const tableSchema = {
                 type: DataTypes.TEXT,
                 allowNull: false,
             },
-            queryType:{
-                type:DataTypes.STRING,
-                allowNull:false,
+            queryType: {
+                type: DataTypes.STRING,
+                allowNull: false,
             }
         },
         options: {
@@ -369,11 +395,11 @@ const tableSchema = {
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique :true
+                unique: true
             },
-            functionString:{
-                type:DataTypes.TEXT,
-                allowNull:false,
+            functionString: {
+                type: DataTypes.TEXT,
+                allowNull: false,
             }
         },
         options: {

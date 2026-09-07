@@ -1,10 +1,13 @@
 const logger = require("../utils/logger");
 const qaFlowsModel = require("../database/MP/models/qaFlows");
+const qaServicesService = require("./qaServices");
 
-const createFlow = async (details) => {
+const createFlow = async ({ serviceName, ...details }) => {
     logger.info();
 
-    return qaFlowsModel.addFlow(details);
+    const flow = await qaFlowsModel.addFlow(details);
+    await qaServicesService.mapFlowToService({ serviceName, qaFlowId: flow.id });
+    return flow;
 };
 
 const deleteFlow = async (filter) => {
