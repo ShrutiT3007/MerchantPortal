@@ -40,7 +40,6 @@ face_data.pkl
 !faceApp/faceR
 .history/
 .eslintrc.json
-.env
 .vscode
 
 
